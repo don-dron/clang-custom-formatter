@@ -2912,25 +2912,6 @@ static bool isFunctionDeclarationName(bool IsCpp, const FormatToken &Current,
 
 bool TokenAnnotator::mustBreakForReturnType(const AnnotatedLine &Line) const {
   assert(Line.MightBeFunctionDecl);
-
-  if ((Style.AlwaysBreakAfterReturnType == FormatStyle::RTBS_TopLevel ||
-       Style.AlwaysBreakAfterReturnType ==
-           FormatStyle::RTBS_TopLevelDefinitions) &&
-      Line.Level > 0) {
-    return false;
-  }
-
-  switch (Style.AlwaysBreakAfterReturnType) {
-  case FormatStyle::RTBS_None:
-    return false;
-  case FormatStyle::RTBS_All:
-  case FormatStyle::RTBS_TopLevel:
-    return true;
-  case FormatStyle::RTBS_AllDefinitions:
-  case FormatStyle::RTBS_TopLevelDefinitions:
-    return Line.mightBeFunctionDefinition();
-  }
-
   return false;
 }
 

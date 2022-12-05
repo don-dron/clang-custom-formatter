@@ -77,7 +77,7 @@ public:
     NotePreviousCallSuperDeclaration = Diags.getCustomDiagID(
         DiagnosticsEngine::Note, "function marked 'call_super' here");
   }
-  bool VisitCXXMethodDecl(CXXMethodDecl *MethodDecl) {
+  bool VisitCXXMethodDecl(CXXMethodDecl *MethodDecl) { 
     if (MethodDecl->isThisDeclarationADefinition() && MethodDecl->hasBody()) {
       // First find out which overridden methods are marked as 'call_super'
       llvm::SmallPtrSet<const CXXMethodDecl *, 16> OverriddenMarkedMethods;

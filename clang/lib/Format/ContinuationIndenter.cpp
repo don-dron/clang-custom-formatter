@@ -632,6 +632,15 @@ unsigned ContinuationIndenter::addTokenToState(LineState &State, bool Newline,
   }
 
   unsigned Penalty = 0;
+
+  if (Previous.isTypeOrIdentifier() && (Current.is(TT_InheritanceColon) || 
+      Current.is(TT_InheritanceComma))) { 
+    Newline = true;
+  }
+
+  if (Current.is(tok::lessless)) { 
+    Newline = true;
+  }
   if (Newline)
     Penalty = addTokenOnNewLine(State, DryRun);
   else
